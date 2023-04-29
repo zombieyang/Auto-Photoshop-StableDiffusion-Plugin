@@ -298,6 +298,13 @@ function getControlNetWeightGuidanceStrengthEnd(controlnet_index = 0) {
     return sd_value
 }
 
+function getControlNetControlMode(controlnet_index = 0) {
+    const radio_value = document.getElementById(
+        'ControlNet_ControlMode_' + controlnet_index
+    ).value
+    return radio_value
+}
+
 function getWeight(controlnet_index = 0) {
     const slider_value = document.getElementById(
         'slControlNetWeight_' + controlnet_index
@@ -360,6 +367,7 @@ function mapPluginSettingsToControlNet(plugin_settings) {
     // debugger
     let active_index = 0
     for (let index = 0; index < g_controlnet_max_supported_models; index++) {
+        console.log('getControlNetControlMode', getControlNetControlMode(index));
         controlnet_units[active_index] = {
             enabled: getEnableControlNet(index),
             input_image: g_generation_session.controlNetImage[index],
@@ -376,6 +384,9 @@ function mapPluginSettingsToControlNet(plugin_settings) {
             guidance_start: getControlNetWeightGuidanceStrengthStart(index),
             guidance_end: getControlNetWeightGuidanceStrengthEnd(index),
             guessmode: false,
+
+            control_mode: getControlNetControlMode(index),
+            pixel_perfect: true,
         }
         active_index++
     }

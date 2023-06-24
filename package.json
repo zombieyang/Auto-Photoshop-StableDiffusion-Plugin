@@ -24,6 +24,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.21.8",
+        "ts-node": "^10.9.1",
         "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
         "@babel/plugin-syntax-class-properties": "^7.12.13",
         "@babel/plugin-transform-react-jsx": "^7.21.5",

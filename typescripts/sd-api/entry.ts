@@ -88,63 +88,74 @@ export class SDApi {
         this.baseUrl = url
     }
     private async _get(url: string) {
-
+        var myHeaders = new Headers()
+        myHeaders.set("Content-Type", "application/json")
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders
+        }
+        return (await fetch(this.baseUrl + url, requestOptions)).json()
     }
     private async _post(url: string, param: any) {
 
+        var myHeaders = new Headers()
+        myHeaders.set("Content-Type", "application/json")
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: param,
+        }
+        return (await fetch(this.baseUrl + url, requestOptions)).json()
     }
 
     public async txt2img(param: Txt2imgParam) {
-        const res = await this._post(this.baseUrl + "/sdapi/v1/txt2img", param)
+        const res = await this._post("/sdapi/v1/txt2img", param)
 
     }
     public async img2img(param: Img2imgParam) {
-        const res = await this._post(this.baseUrl + "/sdapi/v1/img2img", param)
+        const res = await this._post("/sdapi/v1/img2img", param)
 
     }
     public async progress(param: { skip_current_image: boolean }) {
-        const res = await this._get(this.baseUrl + "/sdapi/v1/progress")
+        const res = await this._get("/sdapi/v1/progress")
 
     }
     public async sdModels() {
-        const res = await this._get(this.baseUrl + "/sdapi/v1/sd-models")
+        return await this._get("/sdapi/v1/sd-models")
 
     }
     public async samplers() {
-        const res = await this._get(this.baseUrl + "/sdapi/v1/samplers")
+        return await this._get("/sdapi/v1/samplers")
 
     }
     public async options() {
-        const res = await this._get(this.baseUrl + "/sdapi/v1/options")
+        const res = await this._get("/sdapi/v1/options")
 
     }
     public async interrupt() {
-        const res = await this._post(this.baseUrl + "/sdapi/v1/interrupt", {})
+        const res = await this._post("/sdapi/v1/interrupt", {})
 
     }
     public async extraSingleImage(param: extraParam) {
-        const res = await this._post(this.baseUrl + "/sdapi/v1/extra-single-images", param)
+        const res = await this._post("/sdapi/v1/extra-single-images", param)
 
     }
     public async upscalers() {
-        const res = await this._get(this.baseUrl + "/sdapi/v1/upscalers")
+        return await this._get("/sdapi/v1/upscalers")
 
     }
     public async loras() {
-        const res = await this._get(this.baseUrl + "/sdapi/v1/loras")
-
+        return await this._get("/sdapi/v1/loras")
     }
 
     public async controlnetModelList() {
-        const res = await this._get(this.baseUrl + "/controlnet/model_list")
-
+        return await this._get("/controlnet/model_list")
     }
     public async controlnetModuleList() {
-        const res = await this._get(this.baseUrl + "/controlnet/module_list")
-
+        return await this._get("/controlnet/module_list");
     }
     public async controlnetDetect(param: DetectParam) {
-        const res = await this._post(this.baseUrl + "/controlnet/detect", param)
+        const res = await this._post("/controlnet/detect", param)
 
     }
 }

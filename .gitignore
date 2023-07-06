@@ -33,3 +33,4 @@ original_mask.png
 */dist/*LICENSE.txt
 */dist/*.bundle.js
 typescripts/dist
+typescripts/sd-api/_test*
